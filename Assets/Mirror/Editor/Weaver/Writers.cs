@@ -126,8 +126,7 @@ namespace Mirror.Weaver
             }
             if (variableDefinition.IsAbstract)
             {
-                Weaver.Error($"Cannot generate writer for abstract class {variableReference.Name}. Use a supported type or provide a custom writer", variableReference);
-                return null;
+                throw new GenerateWriterException($"Cannot generate writer for abstract class {variableReference.Name}. Use a supported type or provide a custom writer", variableReference);
             }
 
             // generate writer for class/struct
