@@ -305,7 +305,8 @@ namespace Mirror.Weaver
 
             // return new ArraySegment<T>(array);
             worker.Append(worker.Create(OpCodes.Ldloc_1));
-            worker.Append(worker.Create(OpCodes.Newobj, WeaverTypes.ArraySegmentConstructorReference.MakeHostInstanceGeneric(genericInstance)));
+            MethodReference constructor = WeaverTypes.ImportConstructor(typeof(System.ArraySegment<>));
+            worker.Append(worker.Create(OpCodes.Newobj, constructor.MakeHostInstanceGeneric(genericInstance)));
             worker.Append(worker.Create(OpCodes.Ret));
             return readerFunc;
         }
